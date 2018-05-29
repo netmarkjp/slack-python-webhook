@@ -36,8 +36,7 @@ class Slack():
         data = urlencode({"payload": payload_json})
         req = urlrequest.Request(self.url)
         response = self.opener.open(req, data.encode('utf-8'))
-        print(dir(response))
-        if response.code == 200:
+        if response.code == 429:
             if retry_times >= self.retry_max_count:
                 raise Exception("retry over")
             retry_after = self.retry_after_default
